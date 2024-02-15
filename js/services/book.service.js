@@ -26,7 +26,8 @@ function removeBook(bookId) {
 }
 
 function updatePrice(bookId, newPrice) {
-    const book = gBooks.find(book => book.id === bookId)
+    const book = getBookById(bookId)
+    if (newPrice === book.price) return
     book.price = (newPrice) ? newPrice : book.price
     _saveBooks()
 }
@@ -41,7 +42,7 @@ function addBook(title, price) {
 function _createBooks() {
     gBooks = loadFromStorage('bookDB')
 
-    if (!gBooks) {
+    if (!gBooks.length) {
         gBooks = [
             _createBook('Harry Potter', 200, harryPotterUrl),
             _createBook('The World', 150, worldUrl),

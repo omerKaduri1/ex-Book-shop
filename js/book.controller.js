@@ -23,21 +23,33 @@ function render() {
 }
 
 function onRemoveBook(bookId) {
+    var book = getBookById(bookId)
     removeBook(bookId)
     render()
+    var msg = `${book.title} was deleted successfully!`
+    onSuccessModal(msg)
 }
 
 function onUpdateBook(bookId, bookPrice) {
-    const newPrice = +prompt('Enter new book\'s price', bookPrice)
+    var book = getBookById(bookId)
+    const newPrice = prompt('Enter new book\'s price', bookPrice)
     updatePrice(bookId, newPrice)
     render()
+    if (newPrice === bookPrice) return
+    var msg = `Book price updated successfully,
+    ${book.title} price is ${book.price}.`
+    onSuccessModal(msg, bookId)
 }
 
 function onAddBook() {
+    // var book = getBookById(bookId)
     const newBookTitle = prompt('Enter book\'s name')
     const newBookPrice = +prompt('Enter book\'s price')
     addBook(newBookTitle, newBookPrice)
     render()
+    var msg = `${newBookTitle} was added successfully!
+    it's price is ${newBookPrice}.`
+    onSuccessModal(msg)
 }
 
 function onReadBook(bookId) {
@@ -66,4 +78,20 @@ function onClear() {
     elSearch.value = ''
     resetFilterBy()
     render()
+}
+
+function onSuccessModal(msg, bookId) {
+    const book = getBookById(bookId)
+
+    const elSuccessModal = document.querySelector('.success-msg')
+    const elMsg = elSuccessModal.querySelector('h3')
+    const elBookImg = elSuccessModal.querySelector('img')
+
+    elMsg.innerText = msg
+    // elBookImg.src = book.imgUrl
+
+    elSuccessModal.showModal()
+    setTimeout(() => {
+        elSuccessModal.close()
+    }, 2000);
 }
