@@ -10,6 +10,8 @@ body {
     margin: 0;
     font-family: Arial, Helvetica, sans-serif;
     min-height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
 
 h1 {
@@ -30,4 +32,8 @@ button {
     margin: 2px;
     border-radius: 3px;
     cursor: pointer;
+}
+
+.price, .actions {
+    text-align: center;
 }
