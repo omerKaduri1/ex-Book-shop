@@ -68,3 +68,8 @@ function _createBook(title, price = 100, imgUrl = defaultUrl) {
         imgUrl
     }
 }
+
+function readBook(bookId) {
+    const book = gBooks.find(book => book.id === bookId)
+    return book
+}
