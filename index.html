@@ -10,6 +10,11 @@
 
 <body onload="onInit()">
     <h1>The book shop</h1>
+    <section class="filter">
+        <input oninput="onSetFilter(this)" type="text" placeholder="Search..." />
+        <button onclick="onClear()" class="clear-btn">Clear</button>
+    </section>
+
     <button class="add-btn" onclick="onAddBook()">Add a book</button>
     <table class="books-list">
         <thead>

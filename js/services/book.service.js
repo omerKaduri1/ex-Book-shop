@@ -6,11 +6,17 @@ var hungerGamesUrl = 'https://m.media-amazon.com/images/I/71WSzS6zvCL._AC_UF1000
 var defaultUrl = 'https://wizkids.co.il/cdn/shop/products/Itstartswithus_x700.jpg?v=1669823430'
 
 const BOOK_DB = 'bookDB'
-var gBooks
+var gBooks 
+var gFilterBy = ''
 _createBooks()
 
 function getBooks() {
-    return gBooks
+    if (!gFilterBy){
+        return gBooks
+    } 
+    else {
+        return gBooks.filter(book=> book.title.toLowerCase().includes(gFilterBy.toLowerCase()))
+    } 
 }
 
 function removeBook(bookId) {
@@ -60,4 +66,13 @@ function getBookById(bookId) {
 
 function _saveBooks() {
     saveToStorage(BOOK_DB, gBooks)
+}
+
+function setFilterBy(filterBy) {
+    gFilterBy = filterBy
+    return gBooks.filter(book => book.title.includes(gFilterBy))
+}
+
+function resetFilterBy() {
+    gFilterBy = ''
 }

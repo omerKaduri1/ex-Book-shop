@@ -54,3 +54,16 @@ function onReadBook(bookId) {
 
     elBookDetails.showModal()
 }
+
+function onSetFilter(elSearch) {
+    const filterBy = elSearch.value
+    setFilterBy(filterBy)
+    render()
+}
+
+function onClear() {
+    const elSearch = document.querySelector('.filter input')
+    elSearch.value = ''
+    resetFilterBy()
+    render()
+}
