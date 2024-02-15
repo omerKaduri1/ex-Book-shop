@@ -22,7 +22,8 @@ table {
     padding: var(--container-padding);
 }
 
-.books-list td, th {
+.books-list td,
+th {
     font-size: 14px;
     border: 1px solid black;
     padding: 7px;
@@ -36,10 +37,28 @@ button {
     height: fit-content;
 }
 
-.price, .actions {
+.price,
+.actions {
     text-align: center;
 }
 
 .add-btn {
     margin-left: 10px;
+}
+
+pre {
+    display: grid;
+}
+
+pre h2 {
+    font-size: 30px;
+}
+
+pre h3,
+h3 span {
+    font-size: 17px;
+}
+
+img {
+    width: 200px;
 }

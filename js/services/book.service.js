@@ -3,29 +3,11 @@
 const BOOK_DB = 'bookDB'
 var harryPotterUrl = 'https://wizkids.co.il/cdn/shop/products/02e5ee995b80d61e09a9849df5c83513_x700.gif?v=1514210286'
 var worldUrl = 'https://shop.lonelyplanet.com/cdn/shop/products/the-world-lonely-planet-s-guide-to_900x.jpg?v=1667661690'
-var hungerGamesUrl = 'https://wizkids.co.il/cdn/shop/products/9780439023528_x700.jpg?v=1570375084'
+var hungerGamesUrl = 'https://m.media-amazon.com/images/I/71WSzS6zvCL._AC_UF1000,1000_QL80_.jpg'
 var defaultUrl = 'https://wizkids.co.il/cdn/shop/products/Itstartswithus_x700.jpg?v=1669823430'
 
-var gBooks = [
-    {
-        id: makeId(),
-        title: 'Harry Potter',
-        price: 200,
-        imgUrl: harryPotterUrl
-    },
-    {
-        id: makeId(),
-        title: 'The World',
-        price: 150,
-        imgUrl: worldUrl
-    },
-    {
-        id: makeId(),
-        title: 'The Hunger Games',
-        price: 100,
-        imgUrl: hungerGamesUrl
-    }
-]
+var gBooks
+_createBooks()
 
 function getBooks() {
     return gBooks
@@ -44,8 +26,10 @@ function updatePrice(bookId, newPrice) {
 }
 
 function addBook(title, price) {
+    if (!title || !price) return
     const newBook = _createBook(title, price)
-    gBooks.unshift(newBook)
+    gBooks.push(newBook)
+
 }
 
 function _createBooks() {
@@ -60,7 +44,7 @@ function _createBooks() {
     }
 }
 
-function _createBook(title, price = 100, imgUrl = defaultUrl) {
+function _createBook(title, price, imgUrl = defaultUrl) {
     return {
         id: makeId(),
         title,
@@ -69,7 +53,6 @@ function _createBook(title, price = 100, imgUrl = defaultUrl) {
     }
 }
 
-function readBook(bookId) {
-    const book = gBooks.find(book => book.id === bookId)
-    return book
+function getBookById(bookId) {
+    return gBooks.find(book => book.id === bookId)
 }

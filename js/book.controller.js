@@ -11,9 +11,9 @@ function render() {
           <td class="title">${book.title}</td>
           <td class="price">${book.price}</td>
           <td class="actions">
-             <button onclick="onReadBook('${book.id}')">Read</button>
-             <button onclick="onUpdateBook('${book.id}')">Update</button>
-             <button onclick="onRemoveBook('${book.id}')">Delete</button>
+             <button class="read-bth" onclick="onReadBook('${book.id}')">Read</button>
+             <button class="update-btn" onclick="onUpdateBook('${book.id}', '${book.price}')">Update</button>
+             <button class="delete-btn" onclick="onRemoveBook('${book.id}')">Delete</button>
           </td>
        </tr>
     `)
@@ -27,8 +27,8 @@ function onRemoveBook(bookId) {
     render()
 }
 
-function onUpdateBook(bookId) {
-    const newPrice = +prompt('Enter new book\'s price', )
+function onUpdateBook(bookId, bookPrice) {
+    const newPrice = +prompt('Enter new book\'s price', bookPrice)
     updatePrice(bookId, newPrice)
     render()
 }
@@ -40,15 +40,17 @@ function onAddBook() {
     render()
 }
 
-function onReadBook(bookId){
-    const book = readBook(bookId)
+function onReadBook(bookId) {
+    const book = getBookById(bookId)
 
     const elBookDetails = document.querySelector('.book-details')
-    const elSpan = elBookDetails.querySelector('h2 span')
-    const elPre = elBookDetails.querySelector('pre')
+    const elTitle = elBookDetails.querySelector('h2')
+    const elPriceSpan = elBookDetails.querySelector('h3 span')
+    const elBookImg = elBookDetails.querySelector('img')
 
-    elPre.innerText = JSON.stringify(book, null, 3)
-    elSpan.innerText = book.title
+    elTitle.innerText = book.title
+    elPriceSpan.innerText = book.price
+    elBookImg.src = book.imgUrl
 
     elBookDetails.showModal()
 }
