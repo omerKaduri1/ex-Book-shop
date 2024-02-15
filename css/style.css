@@ -32,8 +32,14 @@ button {
     margin: 2px;
     border-radius: 3px;
     cursor: pointer;
+    width: fit-content;
+    height: fit-content;
 }
 
 .price, .actions {
     text-align: center;
+}
+
+.add-btn {
+    margin-left: 10px;
 }
