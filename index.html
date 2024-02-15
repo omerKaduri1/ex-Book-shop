@@ -7,31 +7,19 @@
     <title>Book shop</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
-<h1>The book shop</h1>
-<body>
-    <table class="books-info">
+
+<body onload="onInit()">
+    <h1>The book shop</h1>
+    <table class="books-list">
+        <thead>
+            <th>Title</th>
+            <th>Price</th>
+            <th>Actions</th>
+        </thead>
         <tbody>
-                <th>Title</th>
-                <th>Price</th>
-                <th>Actions</th>
-            
-            <tr>
-                <td>Harry Potter</td>
-                <td>200</td>
-                <td><button>Read</button><button>Update</button><button>Delete</button></td>
-            </tr>
-            <tr>
-                <td>The World</td>
-                <td>150</td>
-                <td><button>Read</button><button>Update</button><button>Delete</button></td>
-            </tr>
-            <td>The Hunger Games</td>
-            <td>100</td>
-            <td><button>Read</button><button>Update</button><button>Delete</button></td>
-            <tr></tr>
         </tbody>
     </table>
-    <script src="js/book.service.js"></script>
+    <script src="js/services/book.service.js"></script>
     <script src="js/book.controller.js"></script>
 </body>
 
