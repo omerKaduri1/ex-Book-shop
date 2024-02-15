@@ -20,6 +20,8 @@ function render() {
 
     const elBookList = document.querySelector('.books-list tbody')
     elBookList.innerHTML = strHTMLs.join('')
+
+    renderStats()
 }
 
 function onRemoveBook(bookId) {
@@ -94,4 +96,14 @@ function onSuccessModal(msg, bookId) {
     setTimeout(() => {
         elSuccessModal.close()
     }, 2000);
+}
+
+function renderStats() {
+    const elExpensive = document.querySelector('.expensive')
+    const elAvg = document.querySelector('.avg')
+    const elCheap = document.querySelector('.cheap')
+
+    elExpensive.innerText = getExpensive()
+    elAvg.innerText = getAvg()
+    elCheap.innerText = getCheap()
 }

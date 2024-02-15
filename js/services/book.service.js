@@ -77,3 +77,15 @@ function setFilterBy(filterBy) {
 function resetFilterBy() {
     gFilterBy = ''
 }
+
+function getExpensive() {
+    return gBooks.filter(book => +book.price > 200).length
+}
+
+function getAvg() {
+    return gBooks.filter(book => +book.price > 80 && +book.price < 200).length
+}
+
+function getCheap() {
+    return gBooks.filter(book => +book.price < 80).length
+}
