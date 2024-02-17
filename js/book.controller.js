@@ -21,7 +21,7 @@ function render() {
               </td>
            </tr>
         `)
-    
+
         elBookList.innerHTML = strHTMLs.join('')
     }
 
@@ -46,10 +46,17 @@ function onUpdateBook(bookId, bookPrice) {
     ${book.title} price is ${book.price}.`
     onSuccessModal(msg, bookId)
 }
+const gElNewBookModal = document.querySelector('.add-book')
 
 function onAddBook() {
-    const newBookTitle = prompt('Enter book\'s name')
-    const newBookPrice = +prompt('Enter book\'s price')
+    gElNewBookModal.showModal()
+}
+
+function onConfirmClick() {
+    const elNewName = gElNewBookModal.querySelector('.book-name')
+    const elNewPrice = gElNewBookModal.querySelector('.book-price')
+    const newBookTitle = elNewName.value
+    const newBookPrice = elNewPrice.value
     addBook(newBookTitle, newBookPrice)
     render()
     var msg = `${newBookTitle} was added successfully!
