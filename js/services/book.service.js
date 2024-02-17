@@ -6,17 +6,17 @@ var hungerGamesUrl = 'https://m.media-amazon.com/images/I/71WSzS6zvCL._AC_UF1000
 var defaultUrl = 'https://wizkids.co.il/cdn/shop/products/Itstartswithus_x700.jpg?v=1669823430'
 
 const BOOK_DB = 'bookDB'
-var gBooks 
+var gBooks
 var gFilterBy = ''
 _createBooks()
 
 function getBooks() {
-    if (!gFilterBy){
+    if (!gFilterBy) {
         return gBooks
-    } 
+    }
     else {
-        return gBooks.filter(book=> book.title.toLowerCase().includes(gFilterBy.toLowerCase()))
-    } 
+        return gBooks.filter(book => book.title.toLowerCase().includes(gFilterBy.toLowerCase()))
+    }
 }
 
 function removeBook(bookId) {
@@ -42,7 +42,7 @@ function addBook(title, price) {
 function _createBooks() {
     gBooks = loadFromStorage('bookDB')
 
-    if (!gBooks.length) {
+    if (!gBooks || !gBooks.length) {
         gBooks = [
             _createBook('Harry Potter', 200, harryPotterUrl),
             _createBook('The World', 150, worldUrl),
@@ -52,12 +52,13 @@ function _createBooks() {
     }
 }
 
-function _createBook(title, price, imgUrl = defaultUrl) {
+function _createBook(title, price, imgUrl = defaultUrl, rating = 0) {
     return {
         id: makeId(),
         title,
         price,
-        imgUrl
+        imgUrl,
+        rating
     }
 }
 
@@ -88,4 +89,11 @@ function getAvg() {
 
 function getCheap() {
     return gBooks.filter(book => +book.price < 80).length
+}
+
+function updateRate(elBtn, bookId) {
+    const book = getBookById(bookId)
+    if (elBtn.innerText === '-' && book.rating > 0) book.rating--
+    else if (elBtn.innerText === '+' && book.rating < 5) book.rating++
+    _saveBooks()
 }

@@ -1,5 +1,7 @@
 'use strict'
 
+const gElNewBookModal = document.querySelector('.add-book')
+
 function onInit() {
     render()
 }
@@ -46,7 +48,6 @@ function onUpdateBook(bookId, bookPrice) {
     ${book.title} price is ${book.price}.`
     onSuccessModal(msg, bookId)
 }
-const gElNewBookModal = document.querySelector('.add-book')
 
 function onAddBook() {
     gElNewBookModal.showModal()
@@ -59,9 +60,12 @@ function onConfirmClick() {
     const newBookPrice = elNewPrice.value
     addBook(newBookTitle, newBookPrice)
     render()
+    if (!newBookTitle || !newBookPrice) return
     var msg = `${newBookTitle} was added successfully!
     it's price is ${newBookPrice}.`
     onSuccessModal(msg)
+    elNewName.value = ''
+    elNewPrice.value = ''
 }
 
 function onReadBook(bookId) {
@@ -71,10 +75,15 @@ function onReadBook(bookId) {
     const elTitle = elBookDetails.querySelector('h2')
     const elPriceSpan = elBookDetails.querySelector('h3 span')
     const elBookImg = elBookDetails.querySelector('img')
+    const elRate = elBookDetails.querySelector('.rate')
 
     elTitle.innerText = book.title
     elPriceSpan.innerText = book.price
     elBookImg.src = book.imgUrl
+    elRate.innerHTML = `<button onclick="onUpdateRate(event, this, '${book.id}')">-</button><span></span><button onclick="onUpdateRate(event, this, '${book.id}')">+</button></h3>`
+
+    const elRateSpan = elRate.querySelector('span')
+    elRateSpan.innerText = book.rating
 
     elBookDetails.showModal()
 }
@@ -115,4 +124,13 @@ function renderStats() {
     elExpensive.innerText = getExpensive()
     elAvg.innerText = getAvg()
     elCheap.innerText = getCheap()
+}
+
+function onUpdateRate(ev, elBtn, bookId) {
+    ev.preventDefault()
+    const elRateSpan = document.querySelector('.rate span')
+    if (elBtn.innerText === '-' && elRateSpan.innerText > 0) elRateSpan.innerText--
+    else if (elBtn.innerText === '+' && elRateSpan.innerText < 5) elRateSpan.innerText++
+    elRateSpan.innerText += ''
+    updateRate(elBtn, bookId)
 }
