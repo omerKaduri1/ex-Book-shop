@@ -49,6 +49,11 @@ tr {
     max-height: 47px;
 }
 
+tbody {
+    text-align: center;
+    font-size: 25px;
+}
+
 button {
     margin: 2px;
     border-radius: 7px;

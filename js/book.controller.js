@@ -6,20 +6,24 @@ function onInit() {
 
 function render() {
     const books = getBooks()
-    const strHTMLs = books.map(book => `
-       <tr>
-          <td class="title">${book.title}</td>
-          <td class="price">${book.price}</td>
-          <td class="actions">
-             <button class="read-btn" onclick="onReadBook('${book.id}')">Read</button>
-             <button class="update-btn" onclick="onUpdateBook('${book.id}', '${book.price}')">Update</button>
-             <button class="delete-btn" onclick="onRemoveBook('${book.id}')">Delete</button>
-          </td>
-       </tr>
-    `)
-
     const elBookList = document.querySelector('.books-list tbody')
-    elBookList.innerHTML = strHTMLs.join('')
+    if (!books.length) {
+        elBookList.innerHTML = 'No matching books were found...'
+    } else {
+        const strHTMLs = books.map(book => `
+           <tr>
+              <td class="title">${book.title}</td>
+              <td class="price">${book.price}</td>
+              <td class="actions">
+                 <button class="read-btn" onclick="onReadBook('${book.id}')">Read</button>
+                 <button class="update-btn" onclick="onUpdateBook('${book.id}', '${book.price}')">Update</button>
+                 <button class="delete-btn" onclick="onRemoveBook('${book.id}')">Delete</button>
+              </td>
+           </tr>
+        `)
+    
+        elBookList.innerHTML = strHTMLs.join('')
+    }
 
     renderStats()
 }
