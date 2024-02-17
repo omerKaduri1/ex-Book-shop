@@ -12,16 +12,20 @@ body {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
+    flex-grow: 1;
+    justify-content: space-between;
 }
 
 h1 {
     padding: var(--container-padding);
     margin: 0;
-    background-color: rgba(111, 160, 160, .5);
+    background-color: rgb(184, 198, 217, .8);
 }
 
 table {
     padding: var(--container-padding);
+    margin-bottom: 20px;
+    min-height: 450px;
 }
 
 .books-list td,
@@ -39,6 +43,10 @@ th {
 
 tr:nth-child(even) {
     background-color: rgb(230, 227, 227);
+}
+
+tr {
+    max-height: 47px;
 }
 
 button {
@@ -84,7 +92,7 @@ img {
 
 footer {
     padding: 5px var(--container-padding);
-    background-color: rgba(111, 160, 160, .5);
+    background-color: rgb(184, 198, 217, .8);
     font-size: 13px;
 }
 

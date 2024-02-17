@@ -11,7 +11,7 @@ function render() {
           <td class="title">${book.title}</td>
           <td class="price">${book.price}</td>
           <td class="actions">
-             <button class="read-bth" onclick="onReadBook('${book.id}')">Read</button>
+             <button class="read-btn" onclick="onReadBook('${book.id}')">Read</button>
              <button class="update-btn" onclick="onUpdateBook('${book.id}', '${book.price}')">Update</button>
              <button class="delete-btn" onclick="onRemoveBook('${book.id}')">Delete</button>
           </td>
@@ -44,7 +44,6 @@ function onUpdateBook(bookId, bookPrice) {
 }
 
 function onAddBook() {
-    // var book = getBookById(bookId)
     const newBookTitle = prompt('Enter book\'s name')
     const newBookPrice = +prompt('Enter book\'s price')
     addBook(newBookTitle, newBookPrice)
@@ -90,7 +89,6 @@ function onSuccessModal(msg, bookId) {
     const elBookImg = elSuccessModal.querySelector('img')
 
     elMsg.innerText = msg
-    // elBookImg.src = book.imgUrl
 
     elSuccessModal.showModal()
     setTimeout(() => {
