@@ -2,12 +2,16 @@
 
 const gElNewBookModal = document.querySelector('.add-book')
 
+var gQueryOptions = {
+    filterBy: { txt: '', minRating: 0},
+
+}
 function onInit() {
     render()
 }
 
 function render() {
-    const books = getBooks()
+    const books = getBooks(gQueryOptions)
     const elBookList = document.querySelector('.books-list tbody')
     if (!books.length) {
         elBookList.innerHTML = `<tr> No matching books were found...</tr>`
@@ -89,15 +93,23 @@ function onReadBook(bookId) {
     elBookDetails.showModal()
 }
 
-function onSetFilter(elSearch) {
-    const filterBy = elSearch.value
-    setFilterBy(filterBy)
+function onSetFilter() {
+    const elTitle = document.querySelector('.filter-by-title')
+    const elRating = document.querySelector('.filter-by-rating')
+    
+    gQueryOptions.filterBy.txt = elTitle.value
+    gQueryOptions.filterBy.minRating = +elRating.value
+    console.log(elRating.value);
+    
     render()
 }
 
 function onClear() {
-    const elSearch = document.querySelector('.filter input')
-    elSearch.value = ''
+    const elTitle = document.querySelector('.filter-by-title')
+    const elRating = document.querySelector('.filter-by-rating')
+    
+    elTitle.value = ''
+    elRating.value = 0
     resetFilterBy()
     render()
 }

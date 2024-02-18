@@ -7,16 +7,21 @@ var defaultUrl = 'https://wizkids.co.il/cdn/shop/products/Itstartswithus_x700.jp
 
 const BOOK_DB = 'bookDB'
 var gBooks
-var gFilterBy = ''
+// var gFilterBy = ''
 _createBooks()
 
-function getBooks() {
-    if (!gFilterBy) {
-        return gBooks
-    }
-    else {
-        return gBooks.filter(book => book.title.toLowerCase().includes(gFilterBy.toLowerCase()))
-    }
+function getBooks(options) {
+    const books = _filterBooks(options.filterBy)
+    console.log(books);
+    return books
+}
+
+function _filterBooks(filterBy) {
+    var books = gBooks.filter(book =>
+        book.title.toLowerCase().includes(filterBy.txt.toLowerCase()) &&
+        book.rating >= filterBy.minRating)
+        console.log(filterBy.minRating);
+    return books
 }
 
 function removeBook(bookId) {
@@ -43,13 +48,9 @@ function getBookById(bookId) {
     return gBooks.find(book => book.id === bookId)
 }
 
-function setFilterBy(filterBy) {
-    gFilterBy = filterBy
-    return gBooks.filter(book => book.title.includes(gFilterBy))
-}
-
 function resetFilterBy() {
-    gFilterBy = ''
+    gQueryOptions.filterBy.txt = ''
+    gQueryOptions.filterBy.minRating = 0
 }
 
 function getExpensive() {

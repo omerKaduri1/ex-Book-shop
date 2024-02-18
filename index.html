@@ -10,10 +10,31 @@
 
 <body onload="onInit()">
     <h1>The book shop</h1>
-    <section class="filter">
-        <input oninput="onSetFilter(this)" type="text" placeholder="Search..." />
-        <button onclick="onClear()" class="clear-btn">Clear</button>
+
+    <section class="book-filter">
+        <fieldset>
+            <legend>Filter & Sort</legend>
+
+            <div class="filter">
+                <input class="filter-by-title" oninput="onSetFilter()" type="text" placeholder="Search..." />
+                <button onclick="onClear()" class="clear-btn">Clear</button>
+            </div>
+
+            <div>
+                <select class="filter-by-rating" onchange="onSetFilter()">
+                    <option value="0">Select Rating</option>
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                </select>
+            </div>
+
+
+        </fieldset>
     </section>
+
 
     <button class="add-btn" onclick="onAddBook()">Add a book</button>
     <div class="table-container">
