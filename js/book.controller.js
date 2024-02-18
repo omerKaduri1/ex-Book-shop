@@ -16,6 +16,7 @@ function render() {
            <tr>
               <td class="title">${book.title}</td>
               <td class="price">${book.price}</td>
+              <td> ${book.rating} </td>
               <td class="actions">
                  <button class="read-btn" onclick="onReadBook('${book.id}')">Read</button>
                  <button class="update-btn" onclick="onUpdateBook('${book.id}', '${book.price}')">Update</button>
@@ -133,4 +134,5 @@ function onUpdateRate(ev, elBtn, bookId) {
     else if (elBtn.innerText === '+' && elRateSpan.innerText < 5) elRateSpan.innerText++
     elRateSpan.innerText += ''
     updateRate(elBtn, bookId)
+    render()
 }
