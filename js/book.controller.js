@@ -1,6 +1,6 @@
 'use strict'
 
-const gElNewBookModal = document.querySelector('.add-book')
+const gElModal = document.querySelector('.add-book')
 var gBookToEdit = null
 
 const gQueryOptions = {
@@ -50,9 +50,9 @@ function onRemoveBook(bookId) {
 
 function onUpdateBook(bookId) {
 
-    const elName = gElNewBookModal.querySelector('.book-name')
-    const elPrice = gElNewBookModal.querySelector('.book-price')
-    const elHeading = gElNewBookModal.querySelector('.heading')
+    const elName = gElModal.querySelector('.book-name')
+    const elPrice = gElModal.querySelector('.book-price')
+    const elHeading = gElModal.querySelector('.heading')
 
     gBookToEdit = getBookById(bookId)
 
@@ -60,19 +60,19 @@ function onUpdateBook(bookId) {
     elName.value = gBookToEdit.title
     elPrice.value = gBookToEdit.price
 
-    gElNewBookModal.showModal()
+    gElModal.showModal()
 }
 
 function onAddBook() {
-    const elHeading = gElNewBookModal.querySelector('.heading')
+    const elHeading = gElModal.querySelector('.heading')
 
     elHeading.innerText = 'Add a book'
-    gElNewBookModal.showModal()
+    gElModal.showModal()
 }
 
 function onSaveBook() {
-    const elName = gElNewBookModal.querySelector('.book-name')
-    const elPrice = gElNewBookModal.querySelector('.book-price')
+    const elName = gElModal.querySelector('.book-name')
+    const elPrice = gElModal.querySelector('.book-price')
 
     const name = elName.value
     const price = elPrice.value
@@ -107,7 +107,7 @@ function resetBookModal() {
 
 function onCloseModal() {
     resetBookModal()
-    gElNewBookModal.close()
+    gElModal.close()
 }
 
 function onReadBook(bookId) {
