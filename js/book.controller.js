@@ -10,7 +10,7 @@ function render() {
     const books = getBooks()
     const elBookList = document.querySelector('.books-list tbody')
     if (!books.length) {
-        elBookList.innerHTML = 'No matching books were found...'
+        elBookList.innerHTML = `<tr> No matching books were found...</tr>`
     } else {
         const strHTMLs = books.map(book => `
            <tr>
@@ -80,7 +80,7 @@ function onReadBook(bookId) {
     elTitle.innerText = book.title
     elPriceSpan.innerText = book.price
     elBookImg.src = book.imgUrl
-    elRate.innerHTML = `<button onclick="onUpdateRate(event, this, '${book.id}')">-</button><span></span><button onclick="onUpdateRate(event, this, '${book.id}')">+</button></h3>`
+    elRate.innerHTML = `Rating: <button onclick="onUpdateRate(event, this, '${book.id}')">-</button><span></span><button onclick="onUpdateRate(event, this, '${book.id}')">+</button></h3>`
 
     const elRateSpan = elRate.querySelector('span')
     elRateSpan.innerText = book.rating

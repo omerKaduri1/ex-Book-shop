@@ -16,15 +16,17 @@
     </section>
 
     <button class="add-btn" onclick="onAddBook()">Add a book</button>
-    <table class="books-list">
-        <thead>
-            <th>Title</th>
-            <th>Price</th>
-            <th>Actions</th>
-        </thead>
-        <tbody>
-        </tbody>
-    </table>
+    <div class="table-container">
+        <table class="books-list">
+            <thead>
+                <th>Title</th>
+                <th>Price</th>
+                <th>Actions</th>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
 
     <dialog class="add-book">
         <form method="dialog">
@@ -40,7 +42,7 @@
         <form method="dialog">
             <h2></h2>
             <pre>
-                <h3>Price: <span></span></h3>
+                <h3 class="price">Price: <span></span></h3>
                 <h3 class="rate">Rating: </h3>
                 <img src="" alt="book-img">
             </pre>

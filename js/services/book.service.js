@@ -39,6 +39,38 @@ function addBook(title, price) {
     _saveBooks()
 }
 
+function getBookById(bookId) {
+    return gBooks.find(book => book.id === bookId)
+}
+
+function setFilterBy(filterBy) {
+    gFilterBy = filterBy
+    return gBooks.filter(book => book.title.includes(gFilterBy))
+}
+
+function resetFilterBy() {
+    gFilterBy = ''
+}
+
+function getExpensive() {
+    return gBooks.filter(book => +book.price > 200).length
+}
+
+function getAvg() {
+    return gBooks.filter(book => +book.price > 80 && +book.price <= 200).length
+}
+
+function getCheap() {
+    return gBooks.filter(book => +book.price < 80).length
+}
+
+function updateRate(elBtn, bookId) {
+    const book = getBookById(bookId)
+    if (elBtn.innerText === '-' && book.rating > 0) book.rating--
+    else if (elBtn.innerText === '+' && book.rating < 5) book.rating++
+    _saveBooks()
+}
+
 function _createBooks() {
     gBooks = loadFromStorage('bookDB')
 
@@ -62,38 +94,6 @@ function _createBook(title, price, imgUrl = defaultUrl, rating = 0) {
     }
 }
 
-function getBookById(bookId) {
-    return gBooks.find(book => book.id === bookId)
-}
-
 function _saveBooks() {
     saveToStorage(BOOK_DB, gBooks)
-}
-
-function setFilterBy(filterBy) {
-    gFilterBy = filterBy
-    return gBooks.filter(book => book.title.includes(gFilterBy))
-}
-
-function resetFilterBy() {
-    gFilterBy = ''
-}
-
-function getExpensive() {
-    return gBooks.filter(book => +book.price > 200).length
-}
-
-function getAvg() {
-    return gBooks.filter(book => +book.price > 80 && +book.price < 200).length
-}
-
-function getCheap() {
-    return gBooks.filter(book => +book.price < 80).length
-}
-
-function updateRate(elBtn, bookId) {
-    const book = getBookById(bookId)
-    if (elBtn.innerText === '-' && book.rating > 0) book.rating--
-    else if (elBtn.innerText === '+' && book.rating < 5) book.rating++
-    _saveBooks()
 }

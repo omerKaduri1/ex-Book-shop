@@ -22,10 +22,15 @@ h1 {
     background-color: rgb(184, 198, 217, .8);
 }
 
+.table-container {
+    width: 100vw;
+    min-height: 450px;
+}
+
 table {
     padding: var(--container-padding);
     margin-bottom: 20px;
-    min-height: 450px;
+    width: 75%;
 }
 
 .books-list td,
@@ -64,7 +69,6 @@ button {
     height: fit-content;
 }
 
-.price,
 .actions {
     text-align: center;
 }
@@ -121,4 +125,33 @@ footer {
     height: 25px;
     border-radius: 3px;
     border: solid 0.5px black;
+}
+
+.book-price {
+    margin: 10px 0;
+    border-radius: 3px;
+}
+
+.book-name {
+    border-radius: 3px;
+}
+
+.rate {
+    display: flex;
+    align-items: center;
+}
+
+.rate span {
+    margin: 0 5px;
+}
+
+.rate button {
+    height: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.price {
+    margin-top: 5px;
+    margin-bottom: 0;
 }
