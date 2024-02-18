@@ -12,7 +12,6 @@ _createBooks()
 
 function getBooks(options) {
     const books = _filterBooks(options.filterBy)
-    console.log(books);
     return books
 }
 
@@ -20,7 +19,6 @@ function _filterBooks(filterBy) {
     var books = gBooks.filter(book =>
         book.title.toLowerCase().includes(filterBy.txt.toLowerCase()) &&
         book.rating >= filterBy.minRating)
-        console.log(filterBy.minRating);
     return books
 }
 

@@ -121,10 +121,14 @@ footer {
     padding: var(--container-padding);
 }
 
-.filter input {
+.filter-by-title {
     height: 25px;
     border-radius: 3px;
     border: solid 0.5px black;
+}
+
+.filter-by-rating {
+    margin-left: 10px;
 }
 
 .book-price {

@@ -3,10 +3,11 @@
 const gElNewBookModal = document.querySelector('.add-book')
 
 var gQueryOptions = {
-    filterBy: { txt: '', minRating: 0},
+    filterBy: { txt: '', minRating: 0 },
 
 }
 function onInit() {
+    readQueryParams()
     render()
 }
 
@@ -19,7 +20,7 @@ function render() {
         const strHTMLs = books.map(book => `
            <tr>
               <td class="title">${book.title}</td>
-              <td class="price">${book.price}</td>
+              <td class="price">$${book.price}</td>
               <td> ${book.rating} </td>
               <td class="actions">
                  <button class="read-btn" onclick="onReadBook('${book.id}')">Read</button>
@@ -33,6 +34,7 @@ function render() {
     }
 
     renderStats()
+    setQueryParams()
 }
 
 function onRemoveBook(bookId) {
@@ -50,7 +52,7 @@ function onUpdateBook(bookId, bookPrice) {
     render()
     if (newPrice === bookPrice) return
     var msg = `Book price updated successfully,
-    ${book.title} price is ${book.price}.`
+    ${book.title} price is $${book.price}.`
     onSuccessModal(msg, bookId)
 }
 
@@ -67,7 +69,7 @@ function onConfirmClick() {
     render()
     if (!newBookTitle || !newBookPrice) return
     var msg = `${newBookTitle} was added successfully!
-    it's price is ${newBookPrice}.`
+    it's price is $${newBookPrice}.`
     onSuccessModal(msg)
     elNewName.value = ''
     elNewPrice.value = ''
@@ -96,18 +98,17 @@ function onReadBook(bookId) {
 function onSetFilter() {
     const elTitle = document.querySelector('.filter-by-title')
     const elRating = document.querySelector('.filter-by-rating')
-    
+
     gQueryOptions.filterBy.txt = elTitle.value
     gQueryOptions.filterBy.minRating = +elRating.value
-    console.log(elRating.value);
-    
+
     render()
 }
 
 function onClear() {
     const elTitle = document.querySelector('.filter-by-title')
     const elRating = document.querySelector('.filter-by-rating')
-    
+
     elTitle.value = ''
     elRating.value = 0
     resetFilterBy()
@@ -147,4 +148,62 @@ function onUpdateRate(ev, elBtn, bookId) {
     elRateSpan.innerText += ''
     updateRate(elBtn, bookId)
     render()
+}
+
+function readQueryParams() {
+    const queryParams = new URLSearchParams(window.location.search)
+    gQueryOptions.filterBy = {
+        txt: queryParams.get('title') || '',
+        minRating: +queryParams.get('minRating') || 0
+    }
+
+    // if (queryParams.get('sortBy')) {
+    //     const prop = queryParams.get('sortBy')
+    //     const dir = +queryParams.get('sortDir')
+    //     gQueryOptions.sortBy[prop] = dir
+    // }
+
+    // if (queryParams.get('pageIdx')) {
+    //     gQueryOptions.page.idx = +queryParams.get('pageIdx')
+    //     gQueryOptions.page.size = +queryParams.get('pageSize')
+    // }
+    renderQueryParams()
+}
+
+function renderQueryParams() {
+
+    document.querySelector('.filter-by-title').value = gQueryOptions.filterBy.txt
+    document.querySelector('.filter-by-rating').value = gQueryOptions.filterBy.minRating
+
+    // const sortKeys = Object.keys(gQueryOptions.sortBy)
+    // const sortBy = sortKeys[0]
+    // const dir = gQueryOptions.sortBy[sortKeys[0]]
+
+    // document.querySelector('.sort-by select').value = sortBy || ''
+    // document.querySelector('.sort-by input').checked = (dir === -1) ? true : false
+}
+
+function setQueryParams() {
+    const queryParams = new URLSearchParams()
+
+    queryParams.set('title', gQueryOptions.filterBy.txt)
+    queryParams.set('minRating', gQueryOptions.filterBy.minRating)
+
+    // const sortKeys = Object.keys(gQueryOptions.sortBy)
+    // if (sortKeys.length) {
+    //     queryParams.set('sortBy', sortKeys[0])
+    //     queryParams.set('sortDir', gQueryOptions.sortBy[sortKeys[0]])
+    // }
+
+    // if (gQueryOptions.page) {
+    //     queryParams.set('pageIdx', gQueryOptions.page.idx)
+    //     queryParams.set('pageSize', gQueryOptions.page.size)
+    // }
+
+    const newUrl =
+        window.location.protocol + "//" +
+        window.location.host +
+        window.location.pathname + '?' + queryParams.toString()
+
+    window.history.pushState({ path: newUrl }, '', newUrl)
 }
