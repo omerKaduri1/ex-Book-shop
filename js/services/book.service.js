@@ -12,11 +12,20 @@ _createBooks()
 
 function getBooks(options) {
     const books = _filterBooks(options.filterBy)
+
+    if (options.sortBy.title) {
+        books.sort((book1, book2) => (book1.title.localeCompare(book2.title)) * options.sortBy.title)
+    } else if (options.sortBy.price) {
+        books.sort((book1, book2) => (book1.price - book2.price) * options.sortBy.price)
+    } else if (options.sortBy.rating) {
+        books.sort((book1, book2) => (book1.rating - book2.rating) * options.sortBy.rating)
+    }
+
     return books
 }
 
 function _filterBooks(filterBy) {
-    var books = gBooks.filter(book =>
+    const books = gBooks.filter(book =>
         book.title.toLowerCase().includes(filterBy.txt.toLowerCase()) &&
         book.rating >= filterBy.minRating)
     return books

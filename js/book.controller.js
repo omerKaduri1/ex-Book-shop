@@ -2,8 +2,9 @@
 
 const gElNewBookModal = document.querySelector('.add-book')
 
-var gQueryOptions = {
+const gQueryOptions = {
     filterBy: { txt: '', minRating: 0 },
+    sortBy: {}
 
 }
 function onInit() {
@@ -101,6 +102,18 @@ function onSetFilter() {
 
     gQueryOptions.filterBy.txt = elTitle.value
     gQueryOptions.filterBy.minRating = +elRating.value
+
+    render()
+}
+
+function onSetSortBy() {
+    const elSortBy = document.querySelector('.sort-by select')
+    const elDir = document.querySelector('input[name="direction"]:checked')
+
+    var dir = +elDir.value
+
+    gQueryOptions.sortBy = {}
+    gQueryOptions.sortBy[elSortBy.value] = dir
 
     render()
 }

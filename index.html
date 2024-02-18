@@ -31,6 +31,21 @@
                 </select>
             </div>
 
+            <div class="sort-by">
+                <select onchange="onSetSortBy()">
+                    <option value="">Select Sorting</option>
+                    <option value="title">Title</option>
+                    <option value="price">Price</option>
+                    <option value="rating">Rating</option>
+                </select>
+                <form>
+                    <input checked type="radio" name="direction" value="1" id="asc" oninput="onSetSortBy()">
+                    <label for="asc">Ascending</label>
+                    <input type="radio" name="direction" value="-1" id="des" oninput="onSetSortBy()">
+                    <label for="des">Descending</label>
+                </form>
+            </div>
+
 
         </fieldset>
     </section>
