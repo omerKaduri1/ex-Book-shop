@@ -21,23 +21,37 @@ function render() {
         elBookList.innerHTML = `<tr> No matching books were found...</tr>`
     } else {
         const strHTMLs = books.map(book => `
-           <tr>
-              <td class="title">${book.title}</td>
+        <tr>
+        <td class="title">${book.title}</td>
               <td class="price">$${book.price}</td>
-              <td> ${book.rating} </td>
+              <td> ${displayStars(book.rating)} </td>
               <td class="actions">
                  <button class="read-btn" onclick="onReadBook('${book.id}')">Read</button>
                  <button class="update-btn" onclick="onUpdateBook('${book.id}')">Update</button>
                  <button class="delete-btn" onclick="onRemoveBook('${book.id}')">Delete</button>
-              </td>
-           </tr>
-        `)
+                 </td>
+                 </tr>
+                 `)
 
         elBookList.innerHTML = strHTMLs.join('')
     }
 
     renderStats()
     setQueryParams()
+}
+
+function displayStars(rating) {
+    var rateStr = ''
+    const star = '⭐'
+    if (rating) {
+        for (var i = 0; i < rating; i++) {
+            rateStr += star
+        }
+        return rateStr
+    }
+    else {
+        return 'N/A'
+    }
 }
 
 function onRemoveBook(bookId) {
@@ -84,7 +98,7 @@ function onSaveBook() {
             gBookToEdit = null
             var msg = `Book price updated successfully,
            ${name} price is $${price}.`
-           onSuccessModal(msg)
+            onSuccessModal(msg)
         }
     } else {
         addBook(name, price)
