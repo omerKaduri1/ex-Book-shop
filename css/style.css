@@ -160,6 +160,10 @@ footer {
     margin-bottom: 0;
 }
 
-.sort-by {
-    
+th {
+    cursor: pointer;
+}
+
+td {
+    min-width: 200px;
 }

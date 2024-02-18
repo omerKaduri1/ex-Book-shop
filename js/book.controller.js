@@ -158,14 +158,24 @@ function onSetFilter() {
 function onSetSortBy() {
     const elSortBy = document.querySelector('.sort-by select')
     const elDir = document.querySelector('input[name="direction"]:checked')
-
     var dir = +elDir.value
-
     gQueryOptions.sortBy = {}
     gQueryOptions.sortBy[elSortBy.value] = dir
 
     gQueryOptions.page.idx = 0
 
+    render()
+}
+
+var gDir = 1
+function onThSortClick(elTh) {
+    gDir = (gDir === 1) ? -1 : 1
+
+    gQueryOptions.sortBy = {}
+    gQueryOptions.sortBy[elTh.innerText.toLowerCase()] = gDir
+    
+    gQueryOptions.page.idx = 0
+    
     render()
 }
 
