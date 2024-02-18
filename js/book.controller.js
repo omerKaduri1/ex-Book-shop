@@ -4,7 +4,8 @@ const gElNewBookModal = document.querySelector('.add-book')
 
 const gQueryOptions = {
     filterBy: { txt: '', minRating: 0 },
-    sortBy: {}
+    sortBy: {},
+    page: { idx: 0, size: 5 }
 
 }
 function onInit() {
@@ -103,6 +104,7 @@ function onSetFilter() {
     gQueryOptions.filterBy.txt = elTitle.value
     gQueryOptions.filterBy.minRating = +elRating.value
 
+    gQueryOptions.page.idx = 0
     render()
 }
 
@@ -115,6 +117,29 @@ function onSetSortBy() {
     gQueryOptions.sortBy = {}
     gQueryOptions.sortBy[elSortBy.value] = dir
 
+    gQueryOptions.page.idx = 0
+    render()
+}
+
+function onPrevPage() {
+    const totalPageCount = getTotalPageCount(gQueryOptions)
+
+    if (gQueryOptions.page.idx > 0) {
+        gQueryOptions.page.idx--
+    } else {
+        gQueryOptions.page.idx = totalPageCount - 1
+    }
+    render()
+}
+
+function onNextPage() {
+    const totalPageCount = getTotalPageCount(gQueryOptions)
+
+    if (gQueryOptions.page.idx < totalPageCount - 1) {
+        gQueryOptions.page.idx++
+    } else {
+        gQueryOptions.page.idx = 0
+    }
     render()
 }
 

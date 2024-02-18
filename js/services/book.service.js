@@ -21,7 +21,13 @@ function getBooks(options) {
         books.sort((book1, book2) => (book1.rating - book2.rating) * options.sortBy.rating)
     }
 
-    return books
+    const startIdx = options.page.idx * options.page.size
+    return books.slice(startIdx, startIdx + options.page.size)
+}
+
+function getTotalPageCount(options) {
+    const books = _filterBooks(options.filterBy)
+    return Math.ceil(books.length / options.page.size)
 }
 
 function _filterBooks(filterBy) {
