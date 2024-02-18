@@ -1,6 +1,7 @@
 'use strict'
 
 const gElNewBookModal = document.querySelector('.add-book')
+var gBookToEdit = null
 
 const gQueryOptions = {
     filterBy: { txt: '', minRating: 0 },
@@ -26,7 +27,7 @@ function render() {
               <td> ${book.rating} </td>
               <td class="actions">
                  <button class="read-btn" onclick="onReadBook('${book.id}')">Read</button>
-                 <button class="update-btn" onclick="onUpdateBook('${book.id}', '${book.price}')">Update</button>
+                 <button class="update-btn" onclick="onUpdateBook('${book.id}')">Update</button>
                  <button class="delete-btn" onclick="onRemoveBook('${book.id}')">Delete</button>
               </td>
            </tr>
@@ -47,34 +48,66 @@ function onRemoveBook(bookId) {
     onSuccessModal(msg)
 }
 
-function onUpdateBook(bookId, bookPrice) {
-    var book = getBookById(bookId)
-    const newPrice = prompt('Enter new book\'s price', bookPrice)
-    updatePrice(bookId, newPrice)
-    render()
-    if (newPrice === bookPrice) return
-    var msg = `Book price updated successfully,
-    ${book.title} price is $${book.price}.`
-    onSuccessModal(msg, bookId)
-}
+function onUpdateBook(bookId) {
 
-function onAddBook() {
+    const elName = gElNewBookModal.querySelector('.book-name')
+    const elPrice = gElNewBookModal.querySelector('.book-price')
+    const elHeading = gElNewBookModal.querySelector('.heading')
+
+    gBookToEdit = getBookById(bookId)
+
+    elHeading.innerText = 'Update book'
+    elName.value = gBookToEdit.title
+    elPrice.value = gBookToEdit.price
+
     gElNewBookModal.showModal()
 }
 
-function onConfirmClick() {
-    const elNewName = gElNewBookModal.querySelector('.book-name')
-    const elNewPrice = gElNewBookModal.querySelector('.book-price')
-    const newBookTitle = elNewName.value
-    const newBookPrice = elNewPrice.value
-    addBook(newBookTitle, newBookPrice)
+function onAddBook() {
+    const elHeading = gElNewBookModal.querySelector('.heading')
+
+    elHeading.innerText = 'Add a book'
+    gElNewBookModal.showModal()
+}
+
+function onSaveBook() {
+    const elName = gElNewBookModal.querySelector('.book-name')
+    const elPrice = gElNewBookModal.querySelector('.book-price')
+
+    const name = elName.value
+    const price = elPrice.value
+
+    if (!name || !price) return
+    if (gBookToEdit) {
+        if (price !== gBookToEdit.price) {
+            updatePrice(gBookToEdit.id, price)
+            gBookToEdit = null
+            var msg = `Book price updated successfully,
+           ${name} price is $${price}.`
+           onSuccessModal(msg)
+        }
+    } else {
+        addBook(name, price)
+        var msg = `${name} was added successfully!
+        it's price is $${price}.`
+        onSuccessModal(msg)
+    }
+
     render()
-    if (!newBookTitle || !newBookPrice) return
-    var msg = `${newBookTitle} was added successfully!
-    it's price is $${newBookPrice}.`
-    onSuccessModal(msg)
-    elNewName.value = ''
-    elNewPrice.value = ''
+    elName.value = ''
+    elPrice.value = ''
+}
+
+function resetBookModal() {
+    const elForm = document.querySelector('.add-book form')
+    elForm.reset()
+
+    gBookToEdit = null
+}
+
+function onCloseModal() {
+    resetBookModal()
+    gElNewBookModal.close()
 }
 
 function onReadBook(bookId) {
@@ -217,11 +250,9 @@ function renderQueryParams() {
     const sortKeys = Object.keys(gQueryOptions.sortBy)
     const sortBy = sortKeys[0]
     const dir = gQueryOptions.sortBy[sortKeys[0]]
-    console.log(dir);
-    console.log(gQueryOptions.sortBy);
 
     document.querySelector('.sort-by select').value = sortBy || ''
-    document.querySelector('input[name="direction"]:checked').checked 
+    document.querySelector('input[name="direction"]:checked').checked
 }
 
 function setQueryParams() {

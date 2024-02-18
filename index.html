@@ -69,12 +69,14 @@
     </div>
 
     <dialog class="add-book">
-        <form method="dialog">
-            <pre>
+        <form onsubmit="onSaveBook()" method="dialog">
+            <h3 class="heading"></h3>
                 <input class="book-name" type="text" placeholder="Book name?">
                 <input class="book-price" type="text" placeholder="Book price?">
-                <button onclick="onConfirmClick()">Confirm</button>
-            </pre>
+                <div>
+                    <button type="button" onclick="onCloseModal()">Cancel</button>
+                    <button >Save</button>
+                </div>
         </form>
     </dialog>
 
