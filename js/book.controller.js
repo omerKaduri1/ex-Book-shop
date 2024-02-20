@@ -9,6 +9,7 @@ const gQueryOptions = {
     page: { idx: 0, size: 5 }
 
 }
+
 function onInit() {
     readQueryParams()
     render()
@@ -38,8 +39,16 @@ function render() {
         elBookList.innerHTML = strHTMLs.join('')
     }
 
+    renderNextPageBtn()
     renderStats()
     setQueryParams()
+}
+
+function renderNextPageBtn() {
+    var booksLength = getFullBooksLength(gQueryOptions)
+    if (booksLength > gQueryOptions.page.size) document.querySelector('.next').style.visibility = 'visible'
+    else document.querySelector('.next').style.visibility = 'hidden'
+    console.log('length:', booksLength);
 }
 
 function displayStars(rating) {
@@ -184,7 +193,7 @@ function onToggleSortBy(elTh, headerName) {
     })
 
     elTh.querySelector('.sort-dir').innerText = dir === 1 ? '🔺' : '🔻'
-    
+
     setQueryParams()
     render()
 }
