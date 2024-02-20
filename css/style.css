@@ -23,7 +23,6 @@ h1 {
 }
 
 .table-container {
-    width: 100vw;
     min-height: 450px;
 }
 
@@ -166,4 +165,37 @@ th {
 
 td {
     min-width: 200px;
+}
+
+fieldset.all-container {
+    max-width: 100vw;
+    display: flex;
+    gap: 150px;
+    align-items: center;
+    background-color: rgb(184, 198, 217, .8);
+}
+
+fieldset.filter {
+    max-width: 100px;
+    flex-grow: 1;
+}
+
+div.sort-by {
+    border: solid 1px black;
+    display: flex;
+    flex-grow: 1;
+    flex-direction: column;
+}
+
+.inner-container {
+    max-width: 100vw;
+}
+
+.page-nav {
+    display: flex;
+    gap: 110px;
+}
+
+.page-nav button {
+    margin-top: 5px;
 }

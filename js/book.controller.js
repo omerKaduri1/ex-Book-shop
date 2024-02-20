@@ -18,7 +18,9 @@ function render() {
     const books = getBooks(gQueryOptions)
     const elBookList = document.querySelector('.books-list tbody')
     if (!books.length) {
-        elBookList.innerHTML = `<tr> No matching books were found...</tr>`
+        elBookList.innerHTML = `<tr>
+        <td colspan="4"> No matching books were found...</td>
+        </tr>`
     } else {
         const strHTMLs = books.map(book => `
         <tr>
@@ -50,11 +52,12 @@ function displayStars(rating) {
         return rateStr
     }
     else {
-        return 'N/A'
+        return 0
     }
 }
 
 function onRemoveBook(bookId) {
+    if (!confirm('Are you sure you want to delete this book?')) return
     var book = getBookById(bookId)
     removeBook(bookId)
     render()

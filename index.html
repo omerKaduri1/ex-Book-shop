@@ -12,45 +12,48 @@
     <h1>The book shop</h1>
 
     <section class="book-filter">
-        <fieldset>
+        <fieldset class="all-container">
             <legend>Filter & Sort</legend>
 
-            <div class="filter">
+            <fieldset class="filter">
+                <legend>Filter by:</legend>
                 <input class="filter-by-title" oninput="onSetFilter()" type="text" placeholder="Search..." />
                 <button onclick="onClear()" class="clear-btn">Clear</button>
-            </div>
+                <div>
+                    <select class="filter-by-rating" onchange="onSetFilter()">
+                        <option value="0">Select Rating</option>
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                        <option>5</option>
+                    </select>
+                </div>
+            </fieldset>
 
             <div>
-                <select class="filter-by-rating" onchange="onSetFilter()">
-                    <option value="0">Select Rating</option>
-                    <option>1</option>
-                    <option>2</option>
-                    <option>3</option>
-                    <option>4</option>
-                    <option>5</option>
-                </select>
+                <fieldset class="sort-by">
+                    <legend>Sort by:</legend>
+                    <select onchange="onSetSortBy()">
+                        <option value="">Select Sorting</option>
+                        <option value="title">Title</option>
+                        <option value="price">Price</option>
+                        <option value="rating">Rating</option>
+                    </select>
+                    <form>
+                        <input checked type="radio" name="direction" value="1" id="asc" oninput="onSetSortBy()">
+                        <label for="asc">Ascending</label>
+                        <input type="radio" name="direction" value="-1" id="des" oninput="onSetSortBy()">
+                        <label for="des">Descending</label>
+                    </form>
+                </fieldset>
+                
+                <div class="page-nav">
+                    <button class="prev" onclick="onPrevPage()">Previous</button>
+                    <button class="next" onclick="onNextPage()">Next</button>
+                </div>
             </div>
-
-            <div class="sort-by">
-                <select onchange="onSetSortBy()">
-                    <option value="">Select Sorting</option>
-                    <option value="title">Title</option>
-                    <option value="price">Price</option>
-                    <option value="rating">Rating</option>
-                </select>
-                <form>
-                    <input checked type="radio" name="direction" value="1" id="asc" oninput="onSetSortBy()">
-                    <label for="asc">Ascending</label>
-                    <input type="radio" name="direction" value="-1" id="des" oninput="onSetSortBy()">
-                    <label for="des">Descending</label>
-                </form>
-            </div>
-
-            <button onclick="onPrevPage()">Previous</button>
-            <button onclick="onNextPage()">Next</button>
-
-
-        </fieldset>
+        </div>
     </section>
 
 
@@ -71,12 +74,12 @@
     <dialog class="add-book">
         <form onsubmit="onSaveBook()" method="dialog">
             <h3 class="heading"></h3>
-                <input class="book-name" type="text" placeholder="Book name?">
-                <input class="book-price" type="text" placeholder="Book price?">
-                <div>
-                    <button type="button" onclick="onCloseModal()">Cancel</button>
-                    <button >Save</button>
-                </div>
+            <input class="book-name" type="text" placeholder="Book name?">
+            <input class="book-price" type="text" placeholder="Book price?">
+            <div>
+                <button type="button" onclick="onCloseModal()">Cancel</button>
+                <button>Save</button>
+            </div>
         </form>
     </dialog>
 
