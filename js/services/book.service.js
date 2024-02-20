@@ -7,7 +7,6 @@ var defaultUrl = 'https://wizkids.co.il/cdn/shop/products/Itstartswithus_x700.jp
 
 const BOOK_DB = 'bookDB'
 var gBooks
-// var gFilterBy = ''
 _createBooks()
 
 function getBooks(options) {
@@ -90,9 +89,9 @@ function _createBooks() {
 
     if (!gBooks || !gBooks.length) {
         gBooks = [
-            _createBook('Harry Potter', 200, harryPotterUrl),
-            _createBook('The World', 150, worldUrl),
-            _createBook('The Hunger Games', 100, hungerGamesUrl),
+            _createBook('Harry Potter', 200, harryPotterUrl, 3),
+            _createBook('The World', 150, worldUrl, 1),
+            _createBook('The Hunger Games', 100, hungerGamesUrl, 4),
         ]
         _saveBooks()
     }

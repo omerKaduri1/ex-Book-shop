@@ -122,6 +122,7 @@ footer {
 
 .filter-by-title {
     height: 25px;
+    max-width: max-content;
     border-radius: 3px;
     border: solid 0.5px black;
 }
