@@ -170,15 +170,22 @@ function onSetSortBy() {
     render()
 }
 
-var gDir = 1
-function onThSortClick(elTh) {
-    gDir = (gDir === 1) ? -1 : 1
+function onToggleSortBy(elTh, headerName) {
+    var dir = gQueryOptions.sortBy[headerName]
 
-    gQueryOptions.sortBy = {}
-    gQueryOptions.sortBy[elTh.innerText.toLowerCase()] = gDir
+    dir = dir ? -dir : 1
+
+    gQueryOptions.sortBy = {
+        [headerName]: dir
+    }
+
+    document.querySelectorAll('.sort-by-header').forEach(elTh => {
+        elTh.querySelector('.sort-dir').innerText = ''
+    })
+
+    elTh.querySelector('.sort-dir').innerText = dir === 1 ? '🔺' : '🔻'
     
-    gQueryOptions.page.idx = 0
-    
+    setQueryParams()
     render()
 }
 

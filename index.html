@@ -47,13 +47,13 @@
                         <label for="des">Descending</label>
                     </form>
                 </fieldset>
-                
+
                 <div class="page-nav">
                     <button class="prev" onclick="onPrevPage()">Previous</button>
                     <button class="next" onclick="onNextPage()">Next</button>
                 </div>
             </div>
-        </div>
+            </div>
     </section>
 
 
@@ -61,9 +61,18 @@
     <div class="table-container">
         <table class="books-list">
             <thead>
-                <th onclick="onThSortClick(this)">Title</th>
-                <th onclick="onThSortClick(this)">Price</th>
-                <th onclick="onThSortClick(this)">Rating</th>
+                <th class="sort-by-header title" onclick="onToggleSortBy(this, 'title')">
+                    <span>Title</span>
+                    <span class="sort-dir"></span>
+                </th>
+                <th class="sort-by-header price" onclick="onToggleSortBy(this, 'price')">
+                    <span>Price</span>
+                    <span class="sort-dir"></span>
+                </th>
+                <th class="sort-by-header rating" onclick="onToggleSortBy(this, 'rating')">
+                    <span>Rating</span>
+                    <span class="sort-dir"></span>
+                </th>
                 <th>Actions</th>
             </thead>
             <tbody>
