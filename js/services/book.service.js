@@ -24,6 +24,11 @@ function getBooks(options) {
     return books.slice(startIdx, startIdx + options.page.size)
 }
 
+function getFullBooksLength(options) {
+    const books = _filterBooks(options.filterBy)
+    return books.length
+}
+
 function getTotalPageCount(options) {
     const books = _filterBooks(options.filterBy)
     return Math.ceil(books.length / options.page.size)
